@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>3D Food Website</title>
+     <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+     <div class="offer-timer-banner">
+          <div class="offer-banner-text">🔥 70% OFF on Selected Food Items!</div>
+          <div class="offer-timer" id="offerTimer">Offer ends in: <span id="timerCountdown">00:00:00</span></div>
+     </div>
+     <!-- Video Intro Overlay -->
+     <div id="videoIntroOverlay" class="video-intro-overlay">
+          <div class="video-intro-content">
+               <div class="video-container">
+                    <div class="video-fallback-bg"></div>
+                    <div class="video-overlay">
+                         <div class="video-brand">
+                              <div class="brand-logo">🍔</div>
+                              <h1 class="brand-title">Food3D</h1>
+                              <p class="brand-subtitle">Welcome to the Future of Food</p>
+                         </div>
+                    </div>
+               </div>
+               <button id="skipIntroBtn" class="skip-intro-btn">
+                    <span class="skip-icon">⏭️</span>
+                    <span class="skip-text">Skip Intro</span>
+               </button>
+          </div>
+     </div>
+
+     <div id="loaderOverlay" class="loader-overlay">
+          <div class="loader-content">
+               <h2 id="loaderTitle">Choose your mode</h2>
+               <div id="modeButtons">
+                    <button class="loader-btn" id="chooseLight">Light</button>
+                    <button class="loader-btn" id="chooseDark">Dark</button>
+               </div>
+               <div id="langSection" style="display:none;">
+                    <h2 id="langTitle">Choose your language</h2>
+                    <button class="loader-btn" id="chooseEnglish">English</button>
+                    <button class="loader-btn" id="chooseUrdu">اردو</button>
+               </div>
+          </div>
+     </div>
+     <nav class="navbar">
+          <div class="navbar-logo">🍔 Food3D</div>
+          <div class="view-counter" id="viewCounter">
+               <div class="total-views">
+                    <span class="view-icon">👁️</span>
+                    <span id="totalViews">0</span>
+               </div>
+               <div class="active-users">
+                    <span class="active-icon">🟢</span>
+                    <span id="activeUsers">0</span>
+                    <span class="live-indicator">LIVE</span>
+               </div>
+               <div class="view-counter-tooltip" id="viewCounterTooltip">
+                    <div class="tooltip-header">
+                         <span class="tooltip-icon">📊</span>
+                         <span>View Statistics</span>
+                    </div>
+                    <div class="tooltip-content">
+                         <div class="stat-item">
+                              <span class="stat-label">Total Views:</span>
+                              <span class="stat-value" id="tooltipTotalViews">0</span>
+                         </div>
+                         <div class="stat-item">
+                              <span class="stat-label">Active Now:</span>
+                              <span class="stat-value" id="tooltipActiveUsers">0</span>
+                         </div>
+                         <div class="stat-item">
+                              <span class="stat-label">Your Visit #:</span>
+                              <span class="stat-value" id="tooltipVisitorNumber">0</span>
+                         </div>
+                         <div class="stat-item">
+                              <span class="stat-label">Last Updated:</span>
+                              <span class="stat-value" id="tooltipLastUpdate">Just now</span>
+                         </div>
+                    </div>
+               </div>
+          </div>
+          <button class="navbar-toggle" id="navbarToggle" aria-label="Open menu">☰</button>
+          <div class="navbar-menu" id="navbarMenu">
+               <ul class="navbar-links">
+                    <li><a href="#bannerCarousel">Home</a></li>
+                    <li><a href="#aboutSection">About</a></li>
+                    <li><a href="#orderNowBtn">Order Now</a></li>
+               </ul>
+               <div class="navbar-actions">
+                    <form class="search-form" onsubmit="return false;">
+                         <input type="text" placeholder="Search food..." id="searchInput">
+                         <button type="submit" id="searchBtn">🔍</button>
+                    </form>
+                    <button class="cart-btn" id="cartBtn" aria-label="View cart">
+                         <span id="cartCount">0</span>
+                         <span id="cartIcon">👁️</span>
+                    </button>
+                    <button class="toggle-mode" id="toggleMode" aria-label="Toggle light/dark mode">
+                         <span id="modeIcon">🌙</span>
+                    </button>
+               </div>
+          </div>
+     </nav>
+     <!-- Banner Carousel -->
+     <section class="banner-carousel" id="bannerCarousel">
+          <div class="carousel-track" id="carouselTrack">
+               <div class="carousel-slide active">🍕 Pizza Mania</div>
+               <div class="carousel-slide">🍔 Burger Blast</div>
+               <div class="carousel-slide">🌭 Hotdog Heaven</div>
+               <div class="carousel-slide">🍟 Fries Fiesta</div>
+               <div class="carousel-slide">🥪 Sandwich Supreme</div>
+          </div>
+     </section>
+     <!-- Food Cards -->
+     <section class="food-cards" id="foodCards">
+          <div class="food-card" data-name="Pizza Mania">
+               <div class="food-img">🍕</div>
+               <h2>Pizza Mania</h2>
+               <p>Cheesy, saucy, and loaded with toppings. The ultimate pizza experience!</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Burger Blast">
+               <div class="food-img">🍔</div>
+               <h2>Burger Blast</h2>
+               <p>Juicy beef patty, fresh veggies, and secret sauce in a soft bun.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Hotdog Heaven">
+               <div class="food-img">🌭</div>
+               <h2>Hotdog Heaven</h2>
+               <p>Classic hotdog with tangy mustard and crispy onions.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Fries Fiesta">
+               <div class="food-img">🍟</div>
+               <h2>Fries Fiesta</h2>
+               <p>Golden, crispy fries served with a variety of dips.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Sandwich Supreme">
+               <div class="food-img">🥪</div>
+               <h2>Sandwich Supreme</h2>
+               <p>Layered with meats, cheese, and fresh veggies on artisan bread.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Taco Treat">
+               <div class="food-img">🌮</div>
+               <h2>Taco Treat</h2>
+               <p>Spicy beef, crisp lettuce, and creamy cheese in a crunchy shell.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Chicken Nuggets">
+               <div class="food-img">🍗</div>
+               <h2>Chicken Nuggets</h2>
+               <p>Crunchy on the outside, tender on the inside. Kids' favorite!</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Donut Delight">
+               <div class="food-img">🍩</div>
+               <h2>Donut Delight</h2>
+               <p>Sweet, fluffy donuts with colorful sprinkles and glaze.</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+          <div class="food-card" data-name="Ice Cream Dream">
+               <div class="food-img">🍦</div>
+               <h2>Ice Cream Dream</h2>
+               <p>Creamy, cold, and sweet. The perfect treat for any time!</p>
+               <button class="add-cart-btn">Add to Cart</button>
+               <button class="order-card-btn">Order Now</button>
+          </div>
+     </section>
+     <!-- Customer Feedback/Reviews -->
+     <section class="review-section" id="reviewSection">
+          <h2 class="review-heading">Customer Feedback</h2>
+          <div class="review-carousel" id="reviewCarousel">
+               <!-- Reviews will be injected by JS -->
+          </div>
+     </section>
+     <!-- Cart Modal -->
+     <div class="cart-modal" id="cartModal">
+          <div class="cart-content">
+               <h3>Your Cart</h3>
+               <ul id="cartItems"></ul>
+               <button class="close-cart" id="closeCart" aria-label="Close cart">✖️</button>
+          </div>
+     </div>
+
+     <!-- WhatsApp Integration -->
+     <div class="whatsapp-float" id="whatsappFloat">
+          <button class="whatsapp-btn" id="whatsappBtn">
+               <span class="whatsapp-icon">📱</span>
+               <span class="whatsapp-text">Order via WhatsApp</span>
+          </button>
+     </div>
+
+     <!-- Games Section -->
+     <section class="games-section" id="gamesSection" data-section>
+          <h2 class="section-title">🎮 Fun Games</h2>
+          <div class="games-grid">
+               <div class="game-card" id="quizGame">
+                    <div class="game-icon">🧠</div>
+                    <h3>Food Quiz</h3>
+                    <p>Test your food knowledge!</p>
+                    <button class="play-btn" onclick="startQuizGame()">Play Now</button>
+               </div>
+               <div class="game-card" id="memoryGame">
+                    <div class="game-icon">🎴</div>
+                    <h3>Memory Match</h3>
+                    <p>Match food items!</p>
+                    <button class="play-btn" onclick="startMemoryGame()">Play Now</button>
+               </div>
+               <div class="game-card" id="spinWheel">
+                    <div class="game-icon">🎡</div>
+                    <h3>Spin & Win</h3>
+                    <p>Win food discounts!</p>
+                    <button class="play-btn" onclick="startSpinWheel()">Spin Now</button>
+               </div>
+          </div>
+     </section>
+
+     <!-- Loyalty Program -->
+     <section class="loyalty-section" id="loyaltySection" data-section>
+          <h2 class="section-title">🏆 Loyalty Program</h2>
+          <div class="loyalty-card">
+               <div class="loyalty-header">
+                    <div class="loyalty-icon">👑</div>
+                    <div class="loyalty-info">
+                         <h3 id="userLevel">Bronze Member</h3>
+                         <p>Points: <span id="userPoints">0</span></p>
+                    </div>
+               </div>
+               <div class="loyalty-progress">
+                    <div class="progress-bar">
+                         <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p>Next level: <span id="nextLevelPoints">100</span> points</p>
+               </div>
+               <div class="loyalty-rewards">
+                    <h4>Your Rewards</h4>
+                    <div class="rewards-list" id="rewardsList">
+                         <!-- Rewards will be added dynamically -->
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- Location & Delivery -->
+     <section class="location-section" id="locationSection" data-section>
+          <h2 class="section-title">📍 Location & Delivery</h2>
+          <div class="location-content">
+               <div class="map-container">
+                    <div class="map-placeholder" id="mapPlaceholder">
+                         <div class="map-icon">🗺️</div>
+                         <h3>Our Location</h3>
+                         <p>123 Food Street, Karachi, Pakistan</p>
+                         <button class="map-btn" onclick="openGoogleMaps()">View on Map</button>
+                    </div>
+               </div>
+               <div class="delivery-info">
+                    <div class="delivery-status">
+                         <h3>Delivery Status</h3>
+                         <div class="status-indicator" id="deliveryStatus">
+                              <span class="status-dot">🟢</span>
+                              <span>Available</span>
+                         </div>
+                    </div>
+                    <div class="delivery-zones">
+                         <h4>Delivery Zones</h4>
+                         <ul class="zones-list">
+                              <li>🟢 Karachi (Free delivery)</li>
+                              <li>🟡 Hyderabad (Rs. 200)</li>
+                              <li>🔴 Other cities (Contact us)</li>
+                         </ul>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- Personalization -->
+     <section class="personalization-section" id="personalizationSection" data-section>
+          <h2 class="section-title">⚙️ Personalization</h2>
+          <div class="personalization-content">
+               <div class="user-profile">
+                    <h3>Your Profile</h3>
+                    <div class="profile-form">
+                         <input type="text" placeholder="Your Name" id="userName">
+                         <input type="email" placeholder="Your Email" id="userEmail">
+                         <select id="foodPreference">
+                              <option value="">Select Food Preference</option>
+                              <option value="vegetarian">Vegetarian</option>
+                              <option value="non-vegetarian">Non-Vegetarian</option>
+                              <option value="both">Both</option>
+                         </select>
+                         <button class="save-profile-btn" onclick="saveUserProfile()">Save Profile</button>
+                    </div>
+               </div>
+               <div class="favorite-orders">
+                    <h3>Your Favorites</h3>
+                    <div class="favorites-list" id="favoritesList">
+                         <!-- Favorite orders will be added here -->
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- Analytics Dashboard -->
+     <section class="analytics-section" id="analyticsSection" data-section>
+          <h2 class="section-title">📊 Analytics</h2>
+          <div class="analytics-grid">
+               <div class="analytics-card">
+                    <h3>Popular Items</h3>
+                    <div class="popular-items" id="popularItems">
+                         <!-- Popular items will be shown here -->
+                    </div>
+               </div>
+               <div class="analytics-card">
+                    <h3>Trending Now</h3>
+                    <div class="trending-items" id="trendingItems">
+                         <!-- Trending items will be shown here -->
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- Audio Controls -->
+     <div class="audio-controls" id="audioControls">
+          <button class="audio-btn" id="audioBtn">
+               <span class="audio-icon">🔊</span>
+          </button>
+          <div class="audio-menu" id="audioMenu">
+               <button onclick="playBackgroundMusic()">🎵 Background Music</button>
+               <button onclick="toggleVoiceNavigation()">🎤 Voice Navigation</button>
+               <button onclick="toggleAudioDescriptions()">🔊 Audio Descriptions</button>
+          </div>
+     </div>
+
+     <!-- Social Sharing -->
+     <div class="social-sharing" id="socialSharing">
+          <button class="share-btn" onclick="shareOnSocial()">
+               <span class="share-icon">📤</span>
+               <span>Share</span>
+          </button>
+     </div>
+
+     <!-- Special Events -->
+     <section class="events-section" id="eventsSection" data-section>
+          <h2 class="section-title">🎉 Special Events</h2>
+          <div class="events-grid">
+               <div class="event-card">
+                    <div class="event-icon">🎊</div>
+                    <h3>Birthday Offers</h3>
+                    <p>Get 50% off on your birthday!</p>
+                    <button class="event-btn" onclick="claimBirthdayOffer()">Claim Offer</button>
+               </div>
+               <div class="event-card">
+                    <div class="event-icon">🌙</div>
+                    <h3>Ramadan Special</h3>
+                    <p>Special iftar menu available!</p>
+                    <button class="event-btn" onclick="viewRamadanMenu()">View Menu</button>
+               </div>
+               <div class="event-card">
+                    <div class="event-icon">🎄</div>
+                    <h3>Festival Menu</h3>
+                    <p>Celebrate with our special dishes!</p>
+                    <button class="event-btn" onclick="viewFestivalMenu()">View Menu</button>
+               </div>
+          </div>
+     </section>
+     <main>
+          <h1 class="main-heading" data-section data-translate="mainHeading">Welcome to 3D Food World!</h1>
+          <button class="btn-3d" id="orderNowBtn" data-section data-translate="orderNow">Order Now</button>
+          <!-- About Section -->
+          <section class="about-section" id="aboutSection" data-section>
+               <div class="about-video">
+                    <video id="aboutVideo" muted loop controls poster="" width="100%">
+                         <source src="food_video.mp4" type="video/mp4">
+                         Your browser does not support the video tag.
+                    </video>
+               </div>
+               <div class="about-content">
+                    <h2 data-translate="aboutHeading">About Our Food World</h2>
+                    <p data-translate="aboutText">We bring you the best fast food experience with a 3D twist! Enjoy
+                         delicious meals, quick service,
+                         and a vibrant atmosphere. Watch our story to know more about our passion for food.</p>
+               </div>
+          </section>
+          <!-- Order Form (hidden by default) -->
+          <div id="orderFoodName" class="order-food-name" style="display:none;"></div>
+          <form class="order-form-3d" id="orderForm" style="display:none;" method="POST"
+               action="https://formspree.io/f/mgvyqpjr" data-section>
+               <h2 data-translate="placeOrder">Place Your Order</h2>
+               <input type="text" name="name" placeholder="Your Name" required data-translate="yourName" />
+               <input type="email" name="email" placeholder="Your Email" required data-translate="yourEmail" />
+               <input type="tel" name="phone" placeholder="Phone Number" required data-translate="phoneNumber" />
+               <textarea name="details" placeholder="Order Details (e.g. 2x Pizza, 1x Burger)" required
+                    data-translate="orderDetails"></textarea>
+               <button type="submit" data-translate="sendOrder">Send Order</button>
+          </form>
+          <div id="formSuccessMsg" class="form-success-msg"
+               style="display:none;text-align:center;margin:1rem 0;font-weight:bold;color:#ff7e5f;"></div>
+          <!-- Confetti/Balloon Effect Container -->
+          <div id="congratsEffect" style="display:none;"></div>
+          <!-- Floating Mascot -->
+          <div class="floating-mascot" id="floatingMascot">🍕</div>
+     </main>
+     <!-- Food Menu Section (moved back from food-menu.html) -->
+     <section class="food-menu-section" id="foodMenuSection" data-section>
+          <div class="menu-offer-label">70% OFF on these items!</div>
+          <h2 data-translate="foodMenu">Food Menu</h2>
+          <div class="food-menu-categories">
+               <div class="food-menu-category">
+                    <h3 data-translate="fastFood">Fast Food</h3>
+                    <ul>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Pizza"> <span
+                                        data-translate="pizza">Pizza</span></label> <span class="menu-price"><span
+                                        class="old-price">1000 Rs</span> <span class="new-price">400 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Burger"> <span
+                                        data-translate="burger">Burger</span></label> <span class="menu-price"><span
+                                        class="old-price">1000 Rs</span> <span class="new-price">400 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Fries"> <span
+                                        data-translate="fries">Fries</span></label> <span class="menu-price"><span
+                                        class="old-price">500 Rs</span> <span class="new-price">150 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Sandwich"> <span
+                                        data-translate="sandwich">Sandwich</span></label> <span class="menu-price"><span
+                                        class="old-price">800 Rs</span> <span class="new-price">240 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Hotdog"> <span
+                                        data-translate="hotdog">Hotdog</span></label> <span class="menu-price"><span
+                                        class="old-price">700 Rs</span> <span class="new-price">210 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Taco"> <span
+                                        data-translate="taco">Taco</span></label> <span class="menu-price"><span
+                                        class="old-price">600 Rs</span> <span class="new-price">180 Rs</span></span>
+                         </li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Chicken Nuggets"> <span
+                                        data-translate="chickenNuggets">Chicken Nuggets</span></label> <span
+                                   class="menu-price"><span class="old-price">900 Rs</span> <span class="new-price">270
+                                        Rs</span></span></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Donut"> <span
+                                        data-translate="donut">Donut</span></label> <span class="menu-price"><span
+                                        class="old-price">300 Rs</span> <span class="new-price">90 Rs</span></span></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Ice Cream"> <span
+                                        data-translate="iceCream">Ice Cream</span></label> <span
+                                   class="menu-price"><span class="old-price">400 Rs</span> <span class="new-price">120
+                                        Rs</span></span></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Shawarma"> <span
+                                        data-translate="shawarma">Shawarma</span></label> <span class="menu-price"><span
+                                        class="old-price">700 Rs</span> <span class="new-price">210 Rs</span></span>
+                         </li>
+                    </ul>
+               </div>
+               <div class="food-menu-category">
+                    <h3 data-translate="localFood">Local Food</h3>
+                    <ul>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Biryani"> <span
+                                        data-translate="biryani">Biryani</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Nihari"> <span
+                                        data-translate="nihari">Nihari</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Karahi"> <span
+                                        data-translate="karahi">Karahi</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Haleem"> <span
+                                        data-translate="haleem">Haleem</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Qeema"> <span
+                                        data-translate="qeema">Qeema</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Daal Chawal"> <span
+                                        data-translate="daalChawal">Daal Chawal</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Chapli Kebab"> <span
+                                        data-translate="chapliKebab">Chapli Kebab</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Paratha Roll"> <span
+                                        data-translate="parathaRoll">Paratha Roll</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Samosa"> <span
+                                        data-translate="samosa">Samosa</span></label></li>
+                         <li><label><input type="checkbox" class="menu-checkbox" value="Pakora"> <span
+                                        data-translate="pakora">Pakora</span></label></li>
+                    </ul>
+               </div>
+          </div>
+          <div class="selected-menu-list">
+               <h4 data-translate="selectedItems">Selected Items:</h4>
+               <ul id="selectedMenuList"></ul>
+               <button id="menuDoneBtn" class="btn-3d" style="margin-top:1rem;">Done</button>
+          </div>
+     </section>
+     <footer class="footer-3d">
+          <div class="footer-about">
+               <h3 data-translate="aboutHeading">About Food3D</h3>
+               <p data-translate="aboutText">Enjoy the best fast food experience with a 3D twist. Fresh, fast, and fun!
+               </p>
+          </div>
+          <div class="footer-contact">
+               <h4 data-translate="contact">Contact</h4>
+               <p><span data-translate="email">Email</span>: <a
+                         href="mailto:mughalahmedali592@gmail.com">mughalahmedali592@gmail.com</a></p>
+               <p><span data-translate="phone">Phone</span>: <a href="tel:+1234567890">+1 234 567 890</a></p>
+          </div>
+          <div class="footer-social">
+               <h4 data-translate="followUs">Follow Us</h4>
+               <div class="footer-icons">
+                    <a href="https://coderaam.github.io/portfolio_A/" aria-label="Portfolio"
+                         class="footer-icon social-link" data-social="portfolio">🌐</a>
+                    <a href="https://www.facebook.com/share/1AX5NrGzQt/" aria-label="Facebook"
+                         class="footer-icon social-link" data-social="facebook">📘</a>
+                    <a href="#" aria-label="Instagram" class="footer-icon social-link" data-social="instagram">📸</a>
+               </div>
+          </div>
+     </footer>
+     <!-- Sponsor Button -->
+     <div class="sponsor-section">
+          <button class="sponsor-btn" id="sponsorBtn">
+               <span class="sponsor-icon">💻</span>
+               <span class="sponsor-text">Sponsored by Coding aur Code</span>
+          </button>
+     </div>
+     <div class="social-popup" id="socialPopup">
+          <div class="social-popup-content">
+               <div class="popup-icon">🍔</div>
+               <div class="popup-text">Do you want to visit our social page?</div>
+               <div class="popup-actions">
+                    <button id="popupAllow">Allow</button>
+                    <button id="popupCancel">Cancel</button>
+               </div>
+          </div>
+     </div>
+     <div class="scroll-progress" id="scrollProgress"></div>
+     <!-- Floating Signature Badge -->
+     <div class="signature-badge" id="signatureBadge">
+          <span>Made by Ahmed Ali Mughal</span>
+          <div class="signature-tooltip" id="signatureTooltip">
+               <div class="signature-avatar"><img src="Ahmed_Ali_Mughal.jpeg" alt="Ahmed Ali Mughal"
+                         class="signature-img"></div>
+               <div class="signature-info">
+                    <strong>Ahmed Ali Mughal</strong><br>
+                    <small>Web Developer & Designer</small>
+                    <p>Contact: <a href="mailto:mughalahmedali592@gmail.com">mughalahmedali592@gmail.com</a></p>
+                    <div class="signature-socials">
+                         <a href="mailto:mughalahmedali592@gmail.com" aria-label="Email">✉️</a>
+                         <a href="https://coderaam.github.io/portfolio_A/" aria-label="Portfolio" class="social-link"
+                              data-social="portfolio">🌐</a>
+                         <a href="https://www.facebook.com/share/1AX5NrGzQt/" aria-label="Facebook" class="social-link"
+                              data-social="facebook">📘</a>
+                         <a href="#" aria-label="Instagram" class="social-link" data-social="instagram">📸</a>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!-- Back to Top Button -->
+     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+     <!-- Add jsPDF CDN before script.js -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+     <script src="script.js"></script>
+</body>
+
+</html>
